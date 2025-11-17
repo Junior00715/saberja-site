@@ -1,123 +1,253 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Conhecimento Sem Barreiras</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f4f4f4;
-      margin: 0;
-      padding: 0;
-    }
-    header {
-      background: #0077cc;
-      color: white;
-      padding: 20px;
-      text-align: center;
-    }
-    section {
-      padding: 20px;
-      max-width: 800px;
-      margin: auto;
-      background: white;
-      margin-top: 20px;
-      border-radius: 10px;
-    }
-    h2 {
-      color: #0077cc;
-    }
-    ul {
-      list-style-type: square;
-      padding-left: 20px;
-    }
-    footer {
-      text-align: center;
-      padding: 10px;
-      font-size: 14px;
-      color: #666;
-    }
-    a {
-      color: #0077cc;
-      text-decoration: none;
-    }
-    a:hover {
-      text-decoration: underline;
-    }
-    .orientation {
-      background-color: #eaf6ff;
-      border-left: 5px solid #0077cc;
-      padding: 10px;
-      margin-bottom: 20px;
-      border-radius: 5px;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conhecimento Sem Barreiras</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* 1. VARIÁVEIS DE COR E TEMA */
+        :root {
+            --primary-color: #0077cc;
+            --primary-light: #3399ee;
+            --text-color: #333333;
+            --bg-body: #f7f7f7;
+            --bg-card: #ffffff;
+            --border-color: #e0e0e0;
+            --orientation-bg: #eaf6ff;
+        }
+
+        /* Dark Mode (Modo Escuro) */
+        .dark-mode {
+            --primary-color: #4a90e2;
+            --primary-light: #6fa8dc;
+            --text-color: #e0e0e0;
+            --bg-body: #1a1a1a;
+            --bg-card: #2c2c2c;
+            --border-color: #444444;
+            --orientation-bg: #334e68;
+        }
+
+        /* 2. ESTILOS GERAIS */
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: var(--bg-body);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        
+        header {
+            background: var(--primary-color);
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-weight: 700;
+            margin: 0;
+        }
+
+        section {
+            padding: 30px 20px;
+            max-width: 900px;
+            margin: 30px auto;
+            background: var(--bg-card);
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            border: 1px solid var(--border-color);
+        }
+        
+        h2, h3 {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 5px;
+            margin-top: 25px;
+        }
+
+        ul {
+            list-style-type: none; /* Remove bullet points padrão */
+            padding-left: 0;
+        }
+        
+        li {
+            margin-bottom: 10px;
+            padding-left: 1.5em;
+            position: relative;
+        }
+
+        /* Adiciona um ícone/ponto customizado para as listas */
+        li::before {
+            content: '🔹'; /* Ícone visual */
+            color: var(--primary-color);
+            font-weight: bold;
+            display: inline-block;
+            width: 1em;
+            margin-left: -1.5em;
+            position: absolute;
+        }
+
+        /* Estilo para a lista de canais de vídeo */
+        .video-channel-list li::before {
+            content: '▶️'; /* Ícone de play/vídeo */
+        }
+        
+        footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 14px;
+            color: var(--text-color);
+        }
+        
+        a {
+            color: var(--primary-light);
+            text-decoration: none;
+            font-weight: 700;
+        }
+        
+        a:hover {
+            text-decoration: underline;
+            color: var(--primary-color);
+        }
+        
+        .orientation {
+            background-color: var(--orientation-bg);
+            border-left: 5px solid var(--primary-color);
+            padding: 15px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            color: var(--text-color); /* Garante a cor do texto no bloco */
+        }
+
+        /* 3. ESTILO DO SELETOR DE TEMA */
+        #theme-toggle {
+            position: absolute;
+            top: 25px;
+            right: 25px;
+            padding: 8px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            font-weight: 700;
+            transition: background-color 0.3s;
+        }
+
+        #theme-toggle:hover {
+            background-color: rgba(255, 255, 255, 0.4);
+        }
+
+    </style>
 </head>
 <body>
-  <header>
-    <h1>Conhecimento Sem Barreiras</h1>
-    <p>Tornando o saber acessível para todos</p>
-  </header>
+    <header>
+        <button id="theme-toggle">Tema Escuro</button>
+        <h1>Conhecimento Sem Barreiras</h1>
+        <p>Tornando o saber acessível para todos</p>
+    </header>
 
-  <section>
-    <div class="orientation">
-      <strong>Orientação:</strong> Este site foi criado como parte de um projeto de extensão voltado à inclusão digital. Compartilhe este conteúdo com pessoas que tenham dificuldades de mobilidade ou enfrentem barreiras físicas para acessar o conhecimento. Aqui estão ferramentas úteis, tutoriais e sites com conteúdo gratuito e acessível para todos.
-    </div>
+    <section>
+        <div class="orientation">
+            <strong>Orientação:</strong> Este site foi criado como parte de um projeto de extensão voltado à inclusão digital. Compartilhe este conteúdo com pessoas que tenham dificuldades de mobilidade ou enfrentem barreiras físicas para acessar o conhecimento. Aqui estão ferramentas úteis, tutoriais e sites com conteúdo gratuito e acessível para todos.
+        </div>
 
-    <h2>📌 Sobre o Projeto</h2>
-    <p>Este guia digital reúne ferramentas e links úteis para pessoas com limitações de mobilidade acessarem conhecimento de forma prática e gratuita.</p>
+        <h2>📌 Sobre o Projeto</h2>
+        <p>Este guia digital reúne ferramentas e links úteis para pessoas com limitações de mobilidade acessarem conhecimento de forma prática e gratuita.</p>
 
-    <h2>🛠️ Ferramentas de Acessibilidade</h2>
-    <h3>Para Celular:</h3>
-    <ul>
-      <li><strong>TalkBack (Android)</strong>: Leitor de tela.</li>
-      <li><strong>VoiceOver (iPhone)</strong>: Leitor de tela no iOS.</li>
-      <li><strong>Comando por Voz</strong>: Use o Google Assistente ou Siri para navegar por fala.</li>
-    </ul>
+        <h2>🛠️ Ferramentas de Acessibilidade</h2>
+        <h3>Para Celular:</h3>
+        <ul>
+            <li><strong>TalkBack (Android)</strong>: Leitor de tela.</li>
+            <li><strong>VoiceOver (iPhone)</strong>: Leitor de tela no iOS.</li>
+            <li><strong>Comando por Voz</strong>: Use o Google Assistente ou Siri para navegar por fala.</li>
+        </ul>
 
-    <h3>Para Computador:</h3>
-    <ul>
-      <li><strong><a href="https://www.nvaccess.org/" target="_blank">NVDA</a></strong>: Leitor de tela gratuito para Windows.</li>
-      <li><strong><a href="https://chrome.google.com/webstore/detail/read-aloud-a-text-to-spea/hdhinadidafjejdhmfkjgnolgimiaplp" target="_blank">Read Aloud</a></strong>: Extensão do Chrome que lê textos em voz alta.</li>
-      <li><strong>Zoom + Teclado Virtual</strong>: Acessibilidade nativa do Windows.</li>
-    </ul>
+        <h3>Para Computador:</h3>
+        <ul>
+            <li><strong><a href="https://www.nvaccess.org/" target="_blank">NVDA</a></strong>: Leitor de tela gratuito para Windows.</li>
+            <li><strong><a href="https://chrome.google.com/webstore/detail/read-aloud-a-text-to-spea/hdhinadidafjejdhmfkjgnolgimiaplp" target="_blank">Read Aloud</a></strong>: Extensão do Chrome que lê textos em voz alta.</li>
+            <li><strong>Zoom + Teclado Virtual</strong>: Acessibilidade nativa do Windows.</li>
+        </ul>
 
-    <h2>🌐 Sites com Conteúdo Educacional</h2>
-    <ul>
-      <li><a href="https://pt.khanacademy.org" target="_blank">Khan Academy</a>: Aulas de várias matérias.</li>
-     
-      <li><a href="https://www.ead.senac.br/gratuito" target="_blank">Cursos Gratuitos do Senac</a></li>
-      <li><a href="https://www.coursera.org" target="_blank">Coursera</a>: Cursos com legenda e áudio.</li>
-    </ul>
+        <h2>🌐 Sites com Conteúdo Educacional</h2>
+        <ul>
+            <li><a href="https://pt.khanacademy.org" target="_blank">Khan Academy</a>: Aulas de várias matérias.</li>
+            <li><a href="https://www.ead.senac.br/gratuito" target="_blank">Cursos Gratuitos do Senac</a></li>
+            <li><a href="https://www.coursera.org" target="_blank">Coursera</a>: Cursos com legenda e áudio.</li>
+            <li><a href="https://educacao-executiva.fgv.br/cursos/gratuitos" target="_blank">FGV (Fundação Getulio Vargas)</a>: Cursos gratuitos e de qualidade em áreas como Finanças, Direito e Gestão.</li>
+            <li><a href="https://www.ev.org.br/" target="_blank">Fundação Bradesco - Escola Virtual</a>: Mais de 100 cursos livres e gratuitos em diversas áreas.</li>
+            <li><a href="https://sebrae.com.br/sites/PortalSebrae/cursosonline" target="_blank">Sebrae</a>: Ótima fonte de cursos para quem busca empreendedorismo e gestão de pequenos negócios.</li>
+            <li><a href="https://kultivi.com/" target="_blank">Kultivi</a>: Plataforma com foco em concursos, OAB e idiomas, 100% gratuitos com certificação.</li>
+            <li><a href="https://www.escolavirtual.gov.br/" target="_blank">Escola Virtual.Gov (EV.G)</a>: Cursos gratuitos do Governo Federal com certificado.</li>
+        </ul>
 
-    <h2>📚 Tutoriais Rápidos</h2>
-    <ul>
-      <li>Como ativar o TalkBack no Android:</li>
-      <ul>
-        <li>Acesse as configurações do dispositivo</li>
-        <li>Toque em "Acessibilidade"</li>
-        <li>Ative o TalkBack</li>
-      </ul>
-      <li>Como usar o NVDA no computador:</li>
-      <ul>
-        <li>Acesse o site oficial do NVDA</li>
-        <li>Baixe e instale o programa</li>
-        <li>Pressione Ctrl + Alt + N para iniciar</li>
-      </ul>
-      <li>Como ampliar textos e usar comandos de voz:</li>
-      <ul>
-        <li>Use Ctrl + "+" para ampliar páginas no navegador</li>
-        <li>Ative assistentes de voz (Google Assistente ou Siri)</li>
-      </ul>
-    </ul>
+        <h2>▶️ Canais de Vídeo Educacionais (Tecnologia)</h2>
+        <ul class="video-channel-list">
+            <li><a href="http://www.youtube.com/user/cursosemvideo" target="_blank">Curso em Vídeo</a>: Um dos maiores canais educacionais de programação, desenvolvimento web, Python e outras tecnologias.</li>
+        </ul>
 
-    <h2>💬 Mensagem Final</h2>
-    <p>Mesmo com limitações físicas, o conhecimento pode chegar até você. Esse guia é um primeiro passo para quebrar barreiras com tecnologia e inclusão. Compartilhe com quem precisa.</p>
-  </section>
 
-  <footer>
-    Projeto de Extensão - MEC | Desenvolvido em 2025
-  </footer>
+        <h2>📚 Tutoriais Rápidos</h2>
+        <ul>
+            <li>Como ativar o TalkBack no Android:</li>
+            <ul>
+                <li>Acesse as configurações do dispositivo</li>
+                <li>Toque em "Acessibilidade"</li>
+                <li>Ative o TalkBack</li>
+            </ul>
+            <li>Como usar o NVDA no computador:</li>
+            <ul>
+                <li>Acesse o site oficial do NVDA</li>
+                <li>Baixe e instale o programa</li>
+                <li>Pressione Ctrl + Alt + N para iniciar</li>
+            </ul>
+            <li>Como ampliar textos e usar comandos de voz:</li>
+            <ul>
+                <li>Use Ctrl + "+" para ampliar páginas no navegador</li>
+                <li>Ative assistentes de voz (Google Assistente ou Siri)</li>
+            </ul>
+        </ul>
+
+        <h2>💬 Mensagem Final</h2>
+        <p>Mesmo com limitações físicas, o conhecimento pode chegar até você. Esse guia é um primeiro passo para quebrar barreiras com tecnologia e inclusão. Compartilhe com quem precisa.</p>
+    </section>
+
+    <footer>
+        Projeto de Extensão - MEC | Desenvolvido em 2025
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const toggleButton = document.getElementById('theme-toggle');
+            const body = document.body;
+            
+            // Verifica o tema salvo no localStorage ou usa o padrão
+            const currentTheme = localStorage.getItem('theme');
+            if (currentTheme === 'dark') {
+                body.classList.add('dark-mode');
+                toggleButton.textContent = 'Tema Claro';
+            } else {
+                toggleButton.textContent = 'Tema Escuro';
+            }
+
+            toggleButton.addEventListener('click', () => {
+                if (body.classList.contains('dark-mode')) {
+                    // Transiciona para o modo Claro
+                    body.classList.remove('dark-mode');
+                    localStorage.setItem('theme', 'light');
+                    toggleButton.textContent = 'Tema Escuro';
+                } else {
+                    // Transiciona para o modo Escuro
+                    body.classList.add('dark-mode');
+                    localStorage.setItem('theme', 'dark');
+                    toggleButton.textContent = 'Tema Claro';
+                }
+            });
+        });
+    </script>
 </body>
 </html>
